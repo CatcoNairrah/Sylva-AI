@@ -357,12 +357,7 @@ with tab3:
     
     # Train LightGBM model
     models = {
-        'LightGBM': LGBMClassifier(
-            learning_rate=0.1,
-            n_estimators=300,
-            num_leaves=31,
-            random_state=42
-        )
+        'LightGBM': LGBMClassifier(learning_rate=0.1,n_estimators=300,num_leaves=31,random_state=42)
     }
     
     # Train model
@@ -846,7 +841,7 @@ with tab7:
     st.dataframe(show_trend, use_container_width=True)
 
 # Chatbot
-GROQ_API_KEY = "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"
+GROQ_API_KEY = os.environ.get("API_KEY")
 client = Groq(api_key=GROQ_API_KEY)
 
 with tab8:
@@ -1039,7 +1034,7 @@ with tab9:
     st.markdown("""
     ### 🏆 Hackathon Submission
     <div style="background-color: black; padding: 20px; border-radius: 10px; margin: 10px 0;">
-        <p>This application was developed as part of a healthcare AI hackathon.</p>
+        <p>This application was developed as part of a AI hackathon.</p>
         <p><strong>Project Name:</strong> Sylva AI</p>
         <p><strong>Date:</strong> June 2025</p>
     </div>
