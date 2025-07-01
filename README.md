@@ -7,7 +7,7 @@
 ##  Features
 
 - **Patient Intake**: Interactive sidebar for entering clinical and demographic data
-- **Prediction Engine**: Real time heart attack risk predictions using Extra Trees Classifier
+- **Prediction Engine**: Real time heart attack risk predictions using LGBM classifier 
 - **Deep Learning Model**: LGBM model for evaluation and analysis
 - **Data Insight**: Exploratory data analysis and visualizations
 - **Model Comparison**: Accuracy, AUC, ROC curves, confusion matrix
