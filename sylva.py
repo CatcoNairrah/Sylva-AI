@@ -14,20 +14,13 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, roc_auc_score, roc_curve, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
-# Classical ML models
+# ML models
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 
-# Deep learning
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.losses import BinaryFocalCrossentropy
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 def create_heart_disease_dataset():
     np.random.seed(42)
@@ -214,7 +207,7 @@ models = {
 
 
 for name, mp in models.items():
-    print(f"\nRunning GridSearchCV for {name}...")
+    print(f"Running GridSearchCV for {name}...")
     grid = GridSearchCV(mp["model"], mp["params"], cv=5, n_jobs=-1)
     grid.fit(X_train, y_train)
 
@@ -232,29 +225,12 @@ for name, mp in models.items():
 
     print(classification_report(y_test, y_pred))
 
-lgb_model = LGBMClassifier(
-    learning_rate=0.1,
-    n_estimators=300,
-    num_leaves=31,
-    random_state=42
-)
+lgb_model = LGBMClassifier(learning_rate=0.1,n_estimators=300,num_leaves=31,random_state=42)
 lgb_model.fit(X_train, y_train)
 
-xgb_model = XGBClassifier(
-    learning_rate=0.1,
-    max_depth=3,
-    n_estimators=300,
-    use_label_encoder=False,
-    eval_metric='logloss',
-    random_state=42
-)
+xgb_model = XGBClassifier(learning_rate=0.1, max_depth=3, n_estimators=300,use_label_encoder=False,eval_metric='logloss',random_state=42)
 xgb_model.fit(X_train, y_train)
-rf_model = RandomForestClassifier(
-    n_estimators=200,
-    max_depth=15,
-    class_weight=None,
-    random_state=42
-)
+rf_model = RandomForestClassifier( n_estimators=200, max_depth=15, class_weight=None, random_state=42)
 rf_model.fit(X_train, y_train)
 
 rf_model.fit(X_train, y_train)
@@ -262,9 +238,8 @@ rf_model.fit(X_train, y_train)
 rf_probs = rf_model.predict_proba(X_test)[:, 1]
 
 acc = accuracy_score(y_test, rf_probs)
-print(f"Final Accuracy: {acc:.4f}")
+print(f"Final Accuracy: {acc}")
 
 joblib.dump(rf_model, "rf_model.pkl")
 joblib.dump(lgb_model, "lgbm_model.pkl")
 
-joblib.dump(scaler, "scaler.pkl")
